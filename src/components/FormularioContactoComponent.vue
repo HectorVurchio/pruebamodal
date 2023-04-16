@@ -8,6 +8,7 @@
     :comment="comment"
     :terms="terms"
     :missing="missing"
+    @resetForm="sendToBE"
   />
   <form
     ref="formular"
@@ -134,57 +135,20 @@ export default {
   methods: {
     // eslint-disable-next-line
     insert(name, lastname, email, phone, comment, terms) {
-      if (terms) {
-        console.log("Activado");
-        console.log(name, lastname, email, phone, comment, terms);
-      }
       if (
         name == "" ||
         lastname == "" ||
         email == "" ||
         phone == "" ||
         comment == ""
-        // eslint-disable-next-line no-empty
       ) {
-        console.log("campo vacio");
         this.missing = true;
       } else {
         this.missing = false;
       }
-
-      console.log("terms = " + terms);
-      //this.$refs.formular.reset();
-      /*if (terms) {
-        if (
-          name == "" ||
-          lastname == "" ||
-          email == "" ||
-          phone == "" ||
-          comment == ""
-          // eslint-disable-next-line no-empty
-        ) {
-          console.log("campo vacio");
-        } else {
-          console.log(name, lastname, email, phone, comment, terms);
-          //this.$refs.formular.reset();
-          //this.name = "";
-          //this.lastname = "";
-          //this.email = "";
-          //this.phone = "";
-          // this.comment = "";
-          //this.terms = false;
-          //this.$refs.cheque.checked = false;
-
-          this.name = name;
-          this.lastname = lastname;
-          this.email = email;
-          this.phone = phone;
-          this.comment = comment;
-          this.terms = false;
-          this.$refs.cheque.checked = false;
-        }
-      }*/
-      //this.$refs.cheque.checked = false;
+    },
+    sendToBE() {
+      this.$refs.formular.reset();
     },
   },
 };

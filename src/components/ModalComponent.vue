@@ -6,6 +6,7 @@
   <div
     class="modal fade"
     id="exampleModal"
+    ref="exampleModal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -61,7 +62,6 @@
                   : `Mensaje: ${comment}`
               }}
             </li>
-            <li>Terms: {{ terms }}</li>
           </ul>
           <h3 v-else>Aceptar los términos y condiciones</h3>
         </div>
@@ -82,7 +82,10 @@
           <button
             type="button"
             class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
             v-if="terms && !missing"
+            @click="enviar"
           >
             Enviar
           </button>
@@ -104,6 +107,12 @@ export default {
     comment: String,
     terms: Boolean,
     missing: Boolean,
+  },
+  emits: ["resetForm"],
+  methods: {
+    enviar() {
+      this.$emit("resetForm");
+    },
   },
 };
 </script>
