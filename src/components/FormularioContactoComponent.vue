@@ -115,6 +115,7 @@
   </form>
 </template>
 <script>
+import Firebase from "@/services/Firebase.js";
 import ModalComponent from "./ModalComponent.vue";
 export default {
   name: "FormularioContactoComponent",
@@ -147,8 +148,53 @@ export default {
         this.missing = false;
       }
     },
-    sendToBE() {
+    async sendToBE() {
       this.$refs.formular.reset();
+      /* eslint-disable */
+      const name = this.name;
+      const lastname = this.lastname;
+      const email = this.email;
+      const phone = this.phone;
+      const comment = this.comment;
+      const firebase = new Firebase();
+      try {
+        const docRef = await firebase.getAddDoc("messages", {
+          name: name,
+          lastname: lastname,
+          email: email,
+          phone: phone,
+          comment: comment,
+        });
+        //console.log("Document written with ID: ", docRef.id);
+        this.$store.dispatch("setFlash", {
+          method: "change_flash_yellow",
+          message: "Datos enviados con éxito.... ",
+        });
+        setTimeout(() => {
+          this.$store.dispatch("setFlash", {
+            method: "change_flash_yellow",
+            message: "",
+          });
+        }, 3000);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+        this.$store.dispatch("setFlash", {
+          method: "change_flash_red",
+          message: "Envío de datos fallido...",
+        });
+        setTimeout(() => {
+          this.$store.dispatch("setFlash", {
+            method: "change_flash_red",
+            message: "",
+          });
+        }, 3000);
+      }
+
+      this.name = "";
+      this.lastname = "";
+      this.email = "";
+      this.phone = "";
+      this.comment = "";
     },
   },
 };

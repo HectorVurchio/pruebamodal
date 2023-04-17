@@ -1,14 +1,16 @@
 <template>
-  <FormularioContactoComponent />
+  <FlashMessage />
+  <ContactoView />
 </template>
 
 <script>
-import FormularioContactoComponent from "@/components/FormularioContactoComponent.vue";
-
+import ContactoView from "@/views/ContactoView.vue";
+import FlashMessage from "@/components/FlashMessage.vue";
 export default {
   name: "App",
   components: {
-    FormularioContactoComponent,
+    ContactoView,
+    FlashMessage,
   },
 };
 </script>
