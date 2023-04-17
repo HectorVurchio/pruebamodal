@@ -165,11 +165,13 @@ export default {
           phone: phone,
           comment: comment,
         });
+
         //console.log("Document written with ID: ", docRef.id);
         this.$store.dispatch("setFlash", {
           method: "change_flash_yellow",
           message: "Datos enviados con éxito.... ",
         });
+
         setTimeout(() => {
           this.$store.dispatch("setFlash", {
             method: "change_flash_yellow",

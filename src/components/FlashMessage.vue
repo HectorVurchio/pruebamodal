@@ -25,6 +25,8 @@ export default {
   animation-duration: 6s;
   height: 60px;
   font-size: 40px;
+  color: #786868;
+  box-shadow: 0px 0px 30px 0px #878737;
 }
 @keyframes redfade {
   from {
@@ -40,5 +42,6 @@ export default {
   height: 60px;
   font-size: 40px;
   color: yellow;
+  box-shadow: 0px 0px 30px 0px #483434;
 }
 </style>
